@@ -142,20 +142,37 @@ Example format, not fixed answers:
 
 
 def answer_queries(chain: Any, images: list[Path]) -> dict[str, Any]:
-    """Run your chain and return one response for each exact query string.
+    """Process all receipts and return the two total amounts."""
 
-    ``images`` contains every receipt in the selected folder. A valid return
-    value looks like:
+    # 1. 给每张小票准备输入
+    inputs = [
+        {"image_url": image_data_url(path)}
+        for path in images
+    ]
 
-        {QUERY_1: "HK$123.40", QUERY_2: "HK$150.00"}
+    # 2. 批量运行 build_chain() 创建的流程
+    results = chain.batch(
+        inputs,
+        config={"max_concurrency": 3},
+    )
 
-    Use the provided ``image_data_url(path)`` helper to put local images in
-    multimodal human messages. LangChain's ``batch`` method is one simple way
-    to process independent receipt-extraction prompts in parallel.
-    """
-    ### YOUR CODE HERE
-    _ = (chain, images)
-    return {QUERY_1: DUMMY_RESPONSE, QUERY_2: DUMMY_RESPONSE}
+    # 3. 汇总实际支付金额
+    total_paid = sum(
+        (result["totals"]["paid"] for result in results),
+        Decimal("0.00"),
+    )
+
+    # 4. 汇总无优惠价格
+    total_without_discounts = sum(
+        (result["totals"]["without_discounts"] for result in results),
+        Decimal("0.00"),
+    )
+
+    # 5. 按老师要求的格式返回答案
+    return {
+        QUERY_1: f"HK${total_paid:.2f}",
+        QUERY_2: f"HK${total_without_discounts:.2f}",
+    }
 
 
 # Everything below is provided runner/scoring code. No edits are needed.
