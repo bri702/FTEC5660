@@ -52,8 +52,6 @@ def image_data_url(path: Path) -> str:
     return f"data:{mime_type};base64,{encoded}"
 
 
-def build_chain() -> Any:
-    """Create and return the receipt-processing chain."""
     from langchain_deepseek import ChatDeepSeek
     from langchain_core.prompts import ChatPromptTemplate
     from langchain_core.output_parsers import JsonOutputParser
@@ -80,7 +78,6 @@ Read ONE supermarket receipt and extract:
 
 Do not confuse payment with cash tendered, change, or card balance.
 Do not count ROUNDING as a discount.
-Do not count the same discount twice.
 Extract monetary deductions, not discount percentages.
 Use an empty list if there are no discounts.
 Use null if a required amount cannot be read; do not guess.
@@ -132,10 +129,10 @@ Example format, not fixed answers:
 
     # 6. 连接提取和计算两个步骤
     receipt_chain = (
-        RunnablePassthrough.assign(receipt=parse_chain)
-        | RunnablePassthrough.assign(
-            totals=RunnableLambda(compute_receipt)
-        )
+            RunnablePassthrough.assign(receipt=parse_chain)
+            | RunnablePassthrough.assign(
+        totals=RunnableLambda(compute_receipt)
+    )
     )
 
     return receipt_chain
@@ -143,7 +140,6 @@ Example format, not fixed answers:
 
 def answer_queries(chain: Any, images: list[Path]) -> dict[str, Any]:
     """Process all receipts and return the two total amounts."""
-
     # 1. 给每张小票准备输入
     inputs = [
         {"image_url": image_data_url(path)}
@@ -151,10 +147,7 @@ def answer_queries(chain: Any, images: list[Path]) -> dict[str, Any]:
     ]
 
     # 2. 批量运行 build_chain() 创建的流程
-    results = chain.batch(
-        inputs,
-        config={"max_concurrency": 3},
-    )
+    results = chain.batch(inputs)
 
     # 3. 汇总实际支付金额
     total_paid = sum(
@@ -168,10 +161,11 @@ def answer_queries(chain: Any, images: list[Path]) -> dict[str, Any]:
         Decimal("0.00"),
     )
 
-    # 5. 按老师要求的格式返回答案
+    # 5. 返回两个问题的答案
+
+
     return {
-        QUERY_1: f"HK${total_paid:.2f}",
-        QUERY_2: f"HK${total_without_discounts:.2f}",
+        QUERY_1: f"HK${total_paid:.2f}",QUERY_2: f"HK${total_without_discounts:.2f}",
     }
 
 
