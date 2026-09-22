@@ -51,7 +51,7 @@ def image_data_url(path: Path) -> str:
     encoded = base64.b64encode(path.read_bytes()).decode("ascii")
     return f"data:{mime_type};base64,{encoded}"
 
-
+def build_chain() -> Any:
     from langchain_deepseek import ChatDeepSeek
     from langchain_core.prompts import ChatPromptTemplate
     from langchain_core.output_parsers import JsonOutputParser
