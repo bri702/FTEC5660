@@ -51,3 +51,24 @@ homework runner.
 ## Homework 1 solution: 
 > to students: please fill your solution description here.
 
+Visualization：
+
+  A[Receipt images] --> B[image_data_url: encode images]
+  B --> C
+
+  subgraph Batch["chain.batch(inputs): process each receipt independently"]
+        subgraph Extract["parse_chain: extract structured data"]
+            C[receipt_prompt] --> D[DeepSeek model]
+            D --> E[JsonOutputParser]
+        end
+        E --> F["RunnableLambda(compute_receipt)"]
+        F --> G[Calculate per-receipt totals using Decimal]
+    end
+
+  G --> H[Aggregate results across receipts]
+  H --> I[Return dictionary for the two queries]
+  I --> J[Provided runner writes results.csv]
+
+
+Description：
+The solution encodes receipt images with image_data_url() and processes them independently using chain.batch(). The extraction chain, receipt_prompt | llm | JsonOutputParser(), combines instructions and an image, calls deepseek-v4-flash-vision-exp, and parses its response into structured data. RunnableLambda(compute_receipt) then performs monetary calculations using Python Decimal. Finally, the per-receipt results are aggregated and returned as a dictionary for the two required queries, which the provided runner saves to results.csv.
