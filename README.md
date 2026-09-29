@@ -51,6 +51,40 @@ homework runner.
 ## Homework 1 solution: 
 > to students: please fill your solution description here.
 
+## System Architecture
+
+```mermaid
+flowchart LR
+    A["Receipt Images"] --> B["Vision Extraction"]
+    B --> C["JSON Parsing"]
+    C --> D["Validation & Calculation"]
+    D --> E["Aggregate Answers"]
+    E --> F["results.csv"]
+
+    style A fill:#eff6ff,stroke:#93c5fd,color:#1e3a8a
+    style B fill:#f5f3ff,stroke:#c4b5fd,color:#5b21b6
+    style C fill:#f5f3ff,stroke:#c4b5fd,color:#5b21b6
+    style D fill:#ecfdf5,stroke:#6ee7b7,color:#065f46
+    style E fill:#eff6ff,stroke:#93c5fd,color:#1e3a8a
+    style F fill:#f8fafc,stroke:#94a3b8,color:#334155
+```
+
+The pipeline uses a vision model to extract receipt data and Python to validate and calculate monetary values.
+
+1. **Prepare images:** Sort receipt images and encode them as Base64 data URLs.
+2. **Extract and parse:** Use a LangChain vision prompt to extract `paid`, `subtotal`, `rounding`, and `discounts`, then parse the response as JSON.
+3. **Validate and calculate:** Convert amounts to `Decimal` and verify `paid = subtotal + rounding`. Eligible extraction or validation errors trigger a retry, with at most two attempts.
+4. **Aggregate and export:** Process up to three receipts concurrently, sum the results, and write the answers to `results.csv`. An optional `ground_truth.json` provides reference answers for grading.
+
+### Answer Calculation
+
+| Question | Calculation |
+| --- | --- |
+| Total money spent | Sum of `paid` across all receipts |
+| Total without discounts | Sum of `subtotal + sum(abs(discount amounts))` across all receipts |
+
+**Note:** `subtotal` is the amount after discounts but before rounding. The amount without discounts is therefore calculated before rounding; payment rounding is not reapplied.
+
 ### Processing Pipeline
 
 1. **Prepare inputs.** Read supported images from the specified folder, sort them by filename, and encode each image as a Base64 data URL.
