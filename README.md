@@ -51,4 +51,9 @@ homework runner.
 ## Homework 1 solution: 
 > to students: please fill your solution description here.
 
+### Processing Pipeline
 
+1. **Prepare inputs.** Read supported images from the specified folder, sort them by filename, and encode each image as a Base64 data URL.
+2. **Extract amounts.** Combine the receipt image with extraction instructions using `ChatPromptTemplate`. The configured `ChatDeepSeek` model (`deepseek-v4-flash-vision-exp`, `temperature=0`) extracts the final payment, discounted subtotal, rounding adjustment, and individual discounts. `JsonOutputParser` converts the response into structured data.
+3. **Validate and compute.** Convert monetary values to `Decimal` with two decimal places, validate the data structure, and verify that `paid = subtotal + rounding`. Compute each receipt’s amount before discounts by adding the absolute discount amounts back to its subtotal. Eligible parsing or validation failures trigger a retry of the full chain, with at most two attempts. An unrecovered failure propagates to the caller.
+4. **Aggregate answers.** Process receipts with a maximum concurrency of three, then sum the validated results to answer the two questions. Format both answers as HKD amounts and save them to `results.csv`.
