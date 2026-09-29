@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1584" height="940" viewBox="0 0 1584 940" role="img" aria-labelledby="title desc">
+<title id="title">Receipt Understanding Pipeline</title>
+<desc id="desc">Receipt images are encoded, extracted by a vision model, validated with Decimal arithmetic, and aggregated into two answers saved in results.csv.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M1 1 L6 4 L1 7" fill="none" stroke="#94a3b8" stroke-width="1.5"/></marker></defs>
+<rect width="1584" height="940" rx="24" fill="#f5f7fb"/>
+
+<text x="48" y="60" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="15" font-weight="700" fill="#64748b">HW1 / SYSTEM ARCHITECTURE</text>
+<text x="48" y="114" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="40" font-weight="700" fill="#0f172a">Receipt Understanding Pipeline</text>
+<text x="48" y="154" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="22" font-weight="400" fill="#475569">Vision extracts the amounts. Python validates and calculates the answers.</text>
+<rect x="48" y="192" width="1062" height="40" rx="10" fill="#e9edf5" stroke="none"/>
+<text x="66" y="219" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="17" font-weight="600" fill="#475569">PER RECEIPT   ·   LangChain processing   ·   Up to 3 concurrent receipts</text>
+<rect x="1146" y="192" width="390" height="40" rx="10" fill="#e7eeff" stroke="none"/>
+<text x="1164" y="219" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="17" font-weight="600" fill="#3458a4">ACROSS ALL RECEIPTS</text>
+<rect x="48" y="252" width="330" height="356" rx="18" fill="#ffffff" stroke="#dfe5ef"/>
+<rect x="72" y="276" width="44" height="36" rx="10" fill="#eaf1ff" stroke="none"/>
+<text x="83" y="301" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#2563eb">01</text>
+<text x="72" y="354" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" fill="#0f172a">Prepare inputs</text>
+<rect x="414" y="252" width="330" height="356" rx="18" fill="#ffffff" stroke="#dfe5ef"/>
+<rect x="438" y="276" width="44" height="36" rx="10" fill="#f1ebff" stroke="none"/>
+<text x="449" y="301" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#7c3aed">02</text>
+<text x="438" y="354" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" fill="#0f172a">Extract amounts</text>
+<rect x="780" y="252" width="330" height="356" rx="18" fill="#ffffff" stroke="#dfe5ef"/>
+<rect x="804" y="276" width="44" height="36" rx="10" fill="#e4f5f1" stroke="none"/>
+<text x="815" y="301" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#0f766e">03</text>
+<text x="804" y="354" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" fill="#0f172a">Validate &amp; compute</text>
+<rect x="1146" y="252" width="390" height="356" rx="18" fill="#ffffff" stroke="#dfe5ef"/>
+<rect x="1170" y="276" width="44" height="36" rx="10" fill="#eaf1ff" stroke="none"/>
+<text x="1181" y="301" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#2563eb">04</text>
+<text x="1170" y="354" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="25" font-weight="700" fill="#0f172a">Aggregate answers</text>
+<path d="M383 430 L408 430" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M749 430 L774 430" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M1115 430 L1140 430" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="72" y="398" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="18" font-weight="400" fill="#475569">Read and sort receipt images</text>
+<text x="72" y="434" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="18" font-weight="400" fill="#475569">Encode as Base64 data URLs</text>
+<text x="72" y="490" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="18" font-weight="400" fill="#475569">JPG · PNG · GIF · WebP</text>
+<text x="72" y="568" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#2563eb">image_files → image_data_url</text>
+<text x="438" y="398" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="18" font-weight="400" fill="#475569">Prompt + image → vision model</text>
+<text x="438" y="434" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="18" font-weight="400" fill="#475569">Parse the response as JSON</text>
+<text x="438" y="490" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="18" font-weight="400" fill="#475569">paid · subtotal · rounding</text>
+<text x="438" y="520" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="18" font-weight="400" fill="#475569">discounts [label, amount]</text>
+<text x="438" y="568" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="15" font-weight="600" fill="#7c3aed">ChatDeepSeek → JsonOutputParser</text>
+<text x="804" y="398" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="17" font-weight="400" fill="#475569">Normalize money with Decimal</text>
+<text x="804" y="434" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="17" font-weight="400" fill="#475569">Check: paid = subtotal + rounding</text>
+<rect x="800" y="469" width="290" height="72" rx="10" fill="#edf8f5" stroke="none"/>
+<text x="814" y="496" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="18" font-weight="600" fill="#0f766e">without_discount =</text>
+<text x="814" y="523" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="17" font-weight="600" fill="#0f766e">subtotal + Σ |discount amounts|</text>
+<text x="804" y="568" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#0f766e">RunnableLambda(validate)</text>
+<text x="1170" y="397" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="16" font-weight="700" fill="#2563eb">Q1  TOTAL SPENT</text>
+<text x="1170" y="435" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="29" font-weight="600" fill="#0f172a">Σ paid</text>
+<text x="1170" y="488" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="16" font-weight="700" fill="#2563eb">Q2  BEFORE DISCOUNTS</text>
+<text x="1170" y="526" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="27" font-weight="600" fill="#0f172a">Σ without_discount</text>
+<text x="1170" y="568" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#2563eb">answer_queries · HK$0.00 format</text>
+<rect x="48" y="630" width="1062" height="54" rx="12" fill="#eef1f7" stroke="none"/>
+<text x="68" y="664" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="17" font-weight="400" fill="#52627a">RECOVERY   Eligible parsing / validation errors retry the full chain; at most 2 attempts.</text>
+<path d="M1341 608 L1341 714" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="48" y="728" width="1488" height="112" rx="18" fill="#14243b" stroke="none"/>
+<text x="76" y="766" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#9cbbec">OUTPUT</text>
+<text x="76" y="806" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="28" font-weight="600" fill="#ffffff">results.csv</text>
+<text x="352" y="777" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="22" font-weight="500" fill="#ffffff">query  /  model_response  /  correctness</text>
+<text x="352" y="811" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="19" font-weight="400" fill="#b7c7dc">Optional ground_truth.json supplies reference answers for grading only.</text>
+<text x="48" y="886" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#64748b">CALCULATION NOTE</text>
+<text x="236" y="886" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="19" font-weight="400" fill="#475569">Q2 restores the pre-discount, pre-rounding amount; payment rounding is not reapplied.</text>
+</svg>
